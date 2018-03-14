@@ -1,0 +1,82 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+}
+
+menu {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.header {
+  right: -20px;
+  border-color: black;
+  border-style: solid;
+  border-width: 0.5px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.footer {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: black;
+}
+
+.footer > div {
+  background-color: #f6ddcc;
+}
+
+/* Large */
+.main {
+  display: flex;
+  flex: row;
+  /* This aligns items to the end line on main-axis */
+  justify-content: flex-end;
+  margin: 10px 10px 10px 10px;
+}
+
+.main > div {
+  border-style: solid;
+  border-color: black;
+  border-width: 0.5px;
+  background-color: #f6ddcc;
+  margin: 10px 10px 10px 10px;
+}
+
+@for $i from 1 through 12 {
+  .col-lg-#{$i} {
+    width: 100%/(13-$i);
+  }
+}
+
+/* Medium screens */
+@media all and (max-width: 1024px) {
+  .main {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    justify-content: space-around;
+  }
+  
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      width: 100%/(13-$i);
+    }
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 600px) {
+  .main {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+  
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      width: 100%/(13-$i);
+    }
+  }
+}
