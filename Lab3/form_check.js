@@ -77,36 +77,127 @@ function checkEmail(str) {
     }
 }
 
+function checkEmailRegEx(str) {
+    var email = /[a-zA-Z_0-9\.]+@[a-zA-Z_0-9\.]+\.[a-zA-Z][a-zA-Z]+/;
+    if (email.test(str))
+        return true;
+    else {
+        alert("Podaj właściwy e-mail");
+        return false;
+    }
+}
+
+function checkZIPCodeRegEx(str){
+    let errorSpan = document.getElementById("kod");
+    let zipCode = /[0-9][0-9]\-[0-9]{3}/;
+    if (zipCode.test(str)) {
+        errorSpan.innerHTML = "Dobrze";
+        errorSpan.className = "green";
+        return true;
+    }
+    else {
+        errorSpan.innerHTML = "Źle";
+        errorSpan.className = "red";
+        return false;
+    }
+}
+
+function setWrongClass(formularz){
+    for(let i = 0; i < formularz.length-2; i++){
+        formularz[i].className = "wrong";
+    }
+}
+
 function validate(formularz){
     let f_imie = formularz.elements["f_imie"];
     let f_nazwisko = formularz.elements["f_nazwisko"];
     let f_emailValue = formularz.elements["f_email"].value;
-    let f_kod = formularz.elements["f_kod"];
+    let f_kodValue = formularz.elements["f_kod"].value;
     let f_ulica = formularz.elements["f_ulica"];
     let f_miasto = formularz.elements["f_miasto"];
     if(!checkStringAndFocus(f_imie, "Podaj imie!")){
+        setWrongClass(formularz);
         return false;
     }
     if(!checkStringAndFocus(f_nazwisko, "Podaj nazwisko!")){
+        setWrongClass(formularz);
         return false;
     }
-    if( !checkEmail(f_emailValue) ){
+    if( !checkEmailRegEx(f_emailValue) ){
+        setWrongClass(formularz);
         return false;
     }
-    if(!checkStringAndFocus(f_kod, "Podaj kod!")){
+    if(!checkZIPCodeRegEx(f_kodValue)){
+        setWrongClass(formularz);
         return false;
     }
     if(!checkStringAndFocus(f_ulica, "Podaj ulice!")){
+        setWrongClass(formularz);
         return false;
     }
     if(!checkStringAndFocus(f_miasto, "Podaj miasto!")){
+        setWrongClass(formularz);
         return false;
     }
     return true;
+}
+
+function alterRows(i, e) {
+    if (e) {
+        if (i % 2 == 1) {
+            e.setAttribute("style", "background-color: Aqua;");
+        }
+        e = e.nextSibling;
+        while (e && e.nodeType != 1) {
+            e = e.nextSibling;
+        }
+        alterRows(++i, e);
+    }
+}
+
+function showElement(e) {
+    document.getElementById(e).style.visibility = 'visible';
+}
+function hideElement(e) {
+    document.getElementById(e).style.visibility = 'hidden';
+}
+
+function nextNode(e) {
+    while (e && e.nodeType != 1) {
+        e = e.nextSibling;
+    }
+    return e;
+}
+
+function prevNode(e) {
+    while (e && e.nodeType != 1) {
+        e = e.previousSibling;
+    }
+    return e;
+}
+
+function swapRows(b) {
+    var tab = prevNode(b.previousSibling);
+    var tBody = nextNode(tab.firstChild);
+    var lastNode = prevNode(tBody.lastChild);
+    tBody.removeChild(lastNode);
+    var firstNode = nextNode(tBody.firstChild);
+    tBody.insertBefore(lastNode, firstNode);
+}
+
+function cnt(form, msg, maxSize) {
+    if (form.value.length > maxSize)
+        form.value = form.value.substring(0, maxSize);
+    else
+        msg.innerHTML = maxSize - form.value.length;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Script running");
     const formularz = document.getElementsByTagName("form")[0];
     let button = formularz[formularz.length - 1];
+
+    const trNodes = document.getElementsByTagName("tr");
+    alterRows(1, trNodes[0]);
+
 });
