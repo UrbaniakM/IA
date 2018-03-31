@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery</title>
+    <script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const request = new XMLHttpRequest();
+            request.responseType = 'json';
+            //request.open('GET','https://www.instagram.com/niikaap/?__a=1');
+            //request.open('GET','https://www.instagram.com/brtzinio/?__a=1');
+            request.open('GET','https://www.instagram.com/perfekcyjneobliczekrola/?__a=1');
+            request.onload = function() {
+                var imageNodes = request.response.graphql.user.edge_owner_to_timeline_media.edges;
+                for(var i = 0; i < imageNodes.length; i++){
+                    var imgSrc = imageNodes[i].node.thumbnail_src
+                    $('div').append($("<img/>").attr("src", imgSrc));
+                }
+            }
+            request.send(null);
+        });
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
