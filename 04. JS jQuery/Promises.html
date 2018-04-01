@@ -6,20 +6,32 @@
     <script type="text/javascript"
     src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript">
+        function connectToUrl(url){
+            return new Promise(function (resolve,reject){
+                const request = new XMLHttpRequest();
+                request.responseType = 'json';
+                request.open('GET',url);
+                request.onload = function() {
+                    if(request.status === 200){
+                        resolve(request.response);
+                    } else {
+                        reject(Error('Page didn\'t load successfully, error code: ' + request.statusText));
+                    }
+                }
+                request.send(null);
+            });
+        }
+
         $(document).ready(function () {
-            const request = new XMLHttpRequest();
-            request.responseType = 'json';
-            //request.open('GET','https://www.instagram.com/niikaap/?__a=1');
-            //request.open('GET','https://www.instagram.com/brtzinio/?__a=1');
-            request.open('GET','https://www.instagram.com/perfekcyjneobliczekrola/?__a=1');
-            request.onload = function() {
-                var imageNodes = request.response.graphql.user.edge_owner_to_timeline_media.edges;
-                for(var i = 0; i < imageNodes.length; i++){
-                    var imgSrc = imageNodes[i].node.thumbnail_src
+            connectToUrl('https://www.instagram.com/perfekcyjneobliczekrola/?__a=1').then(function(response) {
+                var imageNodes = response.graphql.user.edge_owner_to_timeline_media.edges;
+                for(var i = 0; i < imageNodes.length; i++) {
+                    var imgSrc = imageNodes[i].node.thumbnail_src;
                     $('div').append($("<img/>").attr("src", imgSrc));
                 }
-            }
-            request.send(null);
+            }, function(Error) {
+                console.log(Error);
+            });
         });
     </script>
 </head>
