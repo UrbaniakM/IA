@@ -22,6 +22,9 @@ namespace MVC_website_IA.Models
             get; set;
         }
 
-        public int Id;
+        public int Id
+        {
+            get; set;
+        }
     }
 }
