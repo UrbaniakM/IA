@@ -11,9 +11,12 @@ namespace MVC_website_IA.Controllers
         // GET: Songs
         public ActionResult Index()
         {
-            return Content("Hello World!");
+            return View();
         }
 
-
+        public ActionResult Square(int id)
+        {
+            return Content((id * id).ToString());
+        }
     }
 }

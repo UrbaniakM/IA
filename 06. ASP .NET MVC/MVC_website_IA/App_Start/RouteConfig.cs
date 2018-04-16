@@ -14,6 +14,12 @@ namespace MVC_website_IA
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "SongsSquare",
+                url: "Songs/Square/{id}",
+                defaults: new { controller = "Songs", action = "Square", id = "23" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
