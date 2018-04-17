@@ -93,7 +93,7 @@ namespace MVC_website_IA.Controllers
             return View(song);
         }
 
-        // POST: Songs/Delete/5
+        // DELETE: Songs/Delete/5
         [HttpDelete, ActionName("Delete")]
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]

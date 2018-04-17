@@ -17,6 +17,10 @@ namespace MVC_website_IA.Controllers
         // GET: Genres
         public ActionResult Index()
         {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_GenresList", db.Genres);
+            }
             return View(db.Genres.ToList());
         }
 
@@ -89,25 +93,9 @@ namespace MVC_website_IA.Controllers
             return View(genre);
         }
 
-        // GET: Genres/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Genre genre = db.Genres.Find(id);
-            if (genre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(genre);
-        }
-
-        // POST: Genres/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        // DELETE: Genres/Delete/5
+        [HttpDelete, ActionName("Delete")]
+        public ActionResult Delete(int id)
         {
             Genre genre = db.Genres.Find(id);
             db.Genres.Remove(genre);
