@@ -17,7 +17,7 @@ namespace MVC_website_IA.Models
             get; set;
         }
 
-        public string Genre
+        public int GenreId
         {
             get; set;
         }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MVC_website_IA.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +14,7 @@ namespace MVC_website_IA
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<MusicDBContex>(new DropCreateDatabaseIfModelChanges<MusicDBContex>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

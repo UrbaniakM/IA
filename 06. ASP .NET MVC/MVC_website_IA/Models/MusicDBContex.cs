@@ -11,5 +11,7 @@ namespace MVC_website_IA.Models
         public MusicDBContex() : base("DefaultConnection") { }
 
         public DbSet<Song> Songs { get; set; }
+
+        public System.Data.Entity.DbSet<MVC_website_IA.Models.Genre> Genres { get; set; }
     }
 }
