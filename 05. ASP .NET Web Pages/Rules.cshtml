@@ -6,7 +6,7 @@
         Session["rules"] = rules;
     }
 
-    if (Request["rule"] != null && Request["rule"].Length > 0)
+    if (IsPost && Request["rule"] != null && Request["rule"].Length > 0)
     {
         List<string> rulesCopy = (List<string>)Session["rules"];
         rulesCopy.Add((string)Request["rule"]);
