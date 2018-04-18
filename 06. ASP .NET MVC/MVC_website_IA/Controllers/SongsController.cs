@@ -42,6 +42,7 @@ namespace MVC_website_IA.Controllers
         // GET: Songs/Create
         public ActionResult Create()
         {
+            ViewBag.Genres = db.Genres.ToList();
             return View();
         }
 
@@ -52,6 +53,7 @@ namespace MVC_website_IA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Artist,GenreId")] Song song)
         {
+            ViewBag.Genres = db.Genres.ToList();
             if (ModelState.IsValid)
             {
                 db.Songs.Add(song);
@@ -69,6 +71,7 @@ namespace MVC_website_IA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.Genres = db.Genres.ToList();
             Song song = db.Songs.Find(id);
             if (song == null)
             {
@@ -82,8 +85,9 @@ namespace MVC_website_IA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Artist,Genre")] Song song)
+        public ActionResult Edit([Bind(Include = "Id,Name,Artist,GenreId")] Song song)
         {
+            ViewBag.Genres = db.Genres.ToList();
             if (ModelState.IsValid)
             {
                 db.Entry(song).State = EntityState.Modified;
