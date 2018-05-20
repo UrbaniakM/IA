@@ -1,0 +1,36 @@
+﻿@{ 
+    var rules = new List<string>();
+
+    if (Session["rules"] == null)
+    {
+        Session["rules"] = rules;
+    }
+
+    if (IsPost && Request["rule"] != null && Request["rule"].Length > 0)
+    {
+        List<string> rulesCopy = (List<string>)Session["rules"];
+        rulesCopy.Add((string)Request["rule"]);
+        Session["rules"] = rulesCopy;
+        Response.Redirect("~/Rules.cshtml");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <form method="post" action="~/Rules.cshtml">
+            New rule: <input type="text" name="rule" />
+            <input type="submit" value="Submit">
+        </form>
+
+        <ul>
+            @foreach (string rule in (List<string>)Session["rules"])
+            {
+                <li>@rule</li>
+            }
+        </ul>
+    </body>
+</html>
