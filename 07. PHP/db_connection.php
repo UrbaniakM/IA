@@ -12,4 +12,15 @@
 		function Disconnect($connection){
 			$connection->close();
 		}
+
+    function GetAllProducts(){
+      $connection = Connect();
+    
+      $result = $connection->query("SELECT * FROM `produkty-php` ORDER BY id ASC");
+      $products_array = $result->fetch_all(MYSQLI_ASSOC);
+      
+      Disconnect($connection);
+      
+      return $products_array;
+    }
 ?>

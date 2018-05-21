@@ -1,0 +1,31 @@
+* {
+  font-size: 15px;
+}
+
+.header {
+  font-size: 200%;
+  border-color: black;
+  border-style: solid;
+  border-width: 0.5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+body {
+  margin: 0px;
+}
+
+#cart-list {
+  display: block;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 10px;
+  width: 20%;
+}
+
+#product-list {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
