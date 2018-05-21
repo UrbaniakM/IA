@@ -7,7 +7,7 @@
   <meta name="author" content="">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="./styles.css">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 </head>
 <body>
@@ -24,6 +24,9 @@
             break;
         case "remove":
             queryString = 'action=' + action + '&id=' + product_code;
+            break;
+        case "buy":
+            queryString = 'action=' + action;
             break;
         case "empty":
             queryString = 'action=' + action;

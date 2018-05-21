@@ -24,7 +24,20 @@
 				}
       break;
       case "remove":
-        // TODO
+        if(!empty($_SESSION["cart_item"])){
+          foreach($_SESSION["cart_item"] as $k => $v) {
+	          if($_POST["id"] == $k){
+	          unset($_SESSION["cart_item"][$k]);
+	          if(empty($_SESSION["cart_item"]))
+                unset($_SESSION["cart_item"]);
+            }
+          }
+        }
+      break;
+      case "buy":
+        if(!empty($_SESSION["cart_item"])){
+          unset($_SESSION["cart_item"]);
+        }
       break;
       case "empty":
         unset($_SESSION["cart_item"]);
@@ -35,19 +48,25 @@
 
 <div id="cart-list">
 <div class="header">Shopping Cart</div>
+<div id="cart-actions">
+  <a id="btnEmpty" class="cart-action" onClick="cartAction('empty','');">Empty Cart</a>
+  <a id="btnBuy" class="cart-action" onClick="cartAction('buy','');">Buy</a>
+</div>
 <table>
 <tbody>
   <tr>
     <th>Name</th>
     <th>Quantity</th>
+    <th>Remove</th>
   </tr>
 
   <?php 
   if(isset($_SESSION["cart_item"])){
-    foreach ($_SESSION["cart_item"] as $item){ ?>
+    foreach ($_SESSION["cart_item"] as $key=>$item){ ?>
     <tr>
       <td><?php echo $item["name"]; ?></td>
       <td><?php echo $item["quantity"]; ?></td>
+      <td><a onClick="cartAction('remove','<?php echo $key; ?>')" class="btnRemoveAction cart-action">R</a></td>
     </tr>
   <?php }} ?>
 </tbody>

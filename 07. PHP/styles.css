@@ -23,6 +23,28 @@ body {
   width: 20%;
 }
 
+#cart-list * {
+  width: 100%;
+  height 100%;
+}
+
+table {
+  margin: 0 auto;
+}
+
+td {
+  text-align: center;
+}
+
+#cart-actions {
+  text-align: center;
+  padding: 10px;
+}
+
+#cart-actions * {
+  padding: 25px;
+}
+
 #product-list {
   display: block;
   margin-left: auto;
